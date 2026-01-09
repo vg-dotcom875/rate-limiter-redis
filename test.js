@@ -4,7 +4,7 @@ const rateLimiter = new RateLimiter();
 
 const ip = "1.1.1.1";
 const route = "/order";
-const maxRequests = 1;
+const maxRequests = 2;
 const windowSeconds = 4;
 
 async function test() {
@@ -19,6 +19,9 @@ async function test() {
 
   console.log(await rateLimiter.allowRequest(ip, route, maxRequests, windowSeconds)); 
   await sleep(1000); 
+
+  console.log(await rateLimiter.allowRequest(ip, route, maxRequests, windowSeconds)); 
+  await sleep(2000);
 
   console.log(await rateLimiter.allowRequest(ip, route, maxRequests, windowSeconds)); 
   await rateLimiter.close();
